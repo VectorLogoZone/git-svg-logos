@@ -1,5 +1,6 @@
 *~
 *.amp.html
+cache/
 .cache
 *.class
 crash.log
@@ -9,8 +10,10 @@ dist/
 *.gz
 .idea/
 .jekyll-metadata
+local/
 node_modules/
 *.pyc
+remote/
 .sass-cache/
 _site/
 tmp/
