@@ -1,0 +1,6 @@
+#
+# robots.txt for cached svg logos: this is a cache: nothing should be indexed!
+#
+
+User-agent: *
+Disallow: /
