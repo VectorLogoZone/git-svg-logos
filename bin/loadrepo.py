@@ -120,13 +120,26 @@ for repo_handle in args.repos:
     pathfix = re.compile(repodata["rename"][0]) if "rename" in repodata else None
     include_pattern = re.compile(repodata["include"]) if "include" in repodata else None
 
+    srcpaths = []
     for srcpath in pathlib.Path(logodir).glob("**/*.svg"):
-
-        if (os.path.islink(srcpath)):
-            sys.stdout.write("INFO: skipping symlink %s\n" % srcpath)
+        s = str(srcpath)
+        try:
+            s.encode("utf-8")
+        except UnicodeEncodeError:
+            filtered = [ch if ord(ch) < 128 else '.' for ch in s]
+            sys.stdout.write("WARNING: skipping invalid unicode filename %s\n" % ''.join(filtered))
             continue
 
-        shortpath = os.path.join(repo_handle, str(srcpath)[len(logodir)+1:] if len(repodata["directory"]) > 0 else str(srcpath)[len(logodir):])
+        srcpaths.append(s)
+
+    srcpaths.sort()
+    for srcpath in srcpaths:
+
+        if (os.path.islink(srcpath)):
+            sys.stdout.write("WARNING: skipping symlink %s\n" % srcpath)
+            continue
+
+        shortpath = os.path.join(repo_handle, srcpath[len(logodir)+1:] if len(repodata["directory"]) > 0 else srcpath[len(logodir):])
 
         fixdir, fixname = os.path.split(shortpath)
 
@@ -146,7 +159,8 @@ for repo_handle in args.repos:
 
         name = os.path.splitext(fixname)[0]
 
-        fixname = fixname.lower().replace(' ', '-')
+        fixname = re.sub(r"[^a-z0-9]+", "-", name.lower()) + ".svg"
+        fixdir = re.sub(r"[^/a-z0-9]+", "-", fixdir.lower())
 
         shortpath = os.path.join(fixdir, fixname)
 
@@ -158,14 +172,14 @@ for repo_handle in args.repos:
         dstdir, dstname = os.path.split(dstpath)
 
         pathlib.Path(dstdir).mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(str(srcpath), dstpath)
+        shutil.copyfile(srcpath, dstpath)
 
         if args.verbose:
             sys.stdout.write("DEBUG: repo %s copy from '%s' to '%s' (%s)\n" % (repo_handle, str(srcpath), dstpath, shortpath))
 
         images.append({
             'name': name,
-            'src': giturl + "/blob/" + repodata['branch'] + str(srcpath)[len(gitdir):],
+            'src': giturl + "/blob/" + repodata['branch'] + srcpath[len(gitdir):],
             'img': shortpath
             })
 

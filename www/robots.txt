@@ -1,5 +1,5 @@
 #
-# robots.txt for cached svg logos: this is a cache: nothing should be indexed!
+# robots.txt for cached SVG logos: this is a cache: nothing should be indexed!
 #
 
 User-agent: *

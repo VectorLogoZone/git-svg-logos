@@ -6,18 +6,11 @@ Public git repositories of SVG logos: this is the list used by [Awesome Logos](h
 
 You can see a nicely formatted version of the list at [Awesome Logos](https://www.awesomelogos.org/sources/index.html).
 
-The [raw data](data/sources.yaml) is here in this repository.
-
-## Running
-
-```bash
-pip3 install sh unidecode pyaml
-bin/loadrepo.py
-```
+The [raw list data](data/sources.yaml) is here in this repository.
 
 ## Contributing
 
-Contributions are welcome! Please submit a [github issue](https://github.com/AwesomeLogos/git-svg-logos/issues/new?template=add-a-site.md) with the public URL of a git repository.
+[Yes please!](CONTRIBUTING.md)
 
 ## License
 
@@ -30,3 +23,14 @@ Contributions are welcome! Please submit a [github issue](https://github.com/Awe
 [![Github](https://www.vectorlogo.zone/logos/github/github-ar21.svg)](https://github.com/ "Git Repositories")
 [![Gitlab](https://www.vectorlogo.zone/logos/gitlab/gitlab-ar21.svg)](https://about.gitlab.com/ "Git Repositories")
 [![Python](https://www.vectorlogo.zone/logos/python/python-ar21.svg)](https://www.python.org/ "data load script")
+
+* jq
+* rclone
+* AWS S3
+
+## Running
+
+```bash
+pip3 install sh unidecode pyaml
+bin/loadrepo.py
+```

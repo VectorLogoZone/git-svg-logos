@@ -10,7 +10,7 @@ set -o nounset
 #
 # load an .env file if it exists
 #
-ENV_FILE="./.env"
+ENV_FILE="${1:-./.env}"
 if [ -f "${ENV_FILE}" ]; then
     echo "INFO: loading '${ENV_FILE}'"
     export $(cat "${ENV_FILE}")
@@ -19,16 +19,22 @@ fi
 OUTPUT_DIR=${OUTPUT_DIR:-./local}
 
 #
+# representative subset of repos
+#
+DEV_REPO="${DEV_REPO:-adamfairhead,brandicons,bestofjs,vlz-ar21,svgporn}"
+
+#
 # LATER: make dir if it doesn't exist
 #
 
 #
 # load a few so there is some data
 #
-echo "INFO: loading logos into ${OUTPUT_DIR}"
+echo "INFO: loading ${DEV_REPO//,/ } logos into ${OUTPUT_DIR}"
 ./bin/loadrepo.py \
+    --always \
     --output=${OUTPUT_DIR} \
-    adamfairhead brandicons bestofjs vlz-ar21 svgporn
+    ${DEV_REPO//,/ }
 
 # to force it to refresh local dir add:
 #	--always \

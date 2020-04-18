@@ -22,6 +22,7 @@
   repo: advocately/review-platforms
   branch: master
   directory: logos
+  rename: [ "^(.*)-logo.svg$", "\\1.svg" ]
 
 - provider: github
   handle: alexpeattie
@@ -593,12 +594,14 @@
   branch: master
   directory: static/img
   website: 'https://todogroup.org/'
+  rename: [ "^(logo_)?(.*)$", "\\2" ]
 
 - provider: github
   handle: uditkumar489
   repo: uditkumar489/Icon-pack
   branch: master
   directory: 'Social media'
+  rename: [ "^([0-9]{3}-)?(.*)$", "\\2" ]
 
 - provider: github
   handle: uiwjs
