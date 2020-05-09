@@ -25,8 +25,10 @@ parser.add_argument("--always", help="always process", default=False, dest='alwa
 parser.add_argument("--branch", help="git branch (default='%s')" % default_branch, action="store", default=default_branch)
 parser.add_argument("--cache", help="location of previously downloaded repo", action="store", default="./cache")
 parser.add_argument("--input", help="YAML of potential repos", action="store", default="data/sources.yaml")
-parser.add_argument("--output", help="output directory", action="store", default="./logos")
+parser.add_argument("--output", help="output directory", action="store", default="./local")
 parser.add_argument("--nocleanup", help="do not erase temporary files", default=True, dest='cleanup', action="store_false")
+parser.add_argument("--nocopy", help="do not copy files", action="store_false", default=True, dest='copy')
+parser.add_argument("--provider", help="only do specific provider", action="store", default="*", dest="provider")
 parser.add_argument('repos', help='repos (all if none specified)', metavar='repos', nargs='*')
 
 args = parser.parse_args()
@@ -64,6 +66,10 @@ for repo_handle in args.repos:
         sys.exit(1)
 
     repodata = repolist[repo_handle]
+
+    if args.provider != '*' and args.provider != repodata['provider']:
+        sys.stdout.write("INFO: skipping %s (provider is %s, not %s)\n" % (repo_handle, repodata['provider'], args.provider))
+        continue
 
     sys.stdout.write("OUTPUT: processing %s (%s)\n" % (repo_handle, repodata["repo"]))
 
@@ -171,11 +177,15 @@ for repo_handle in args.repos:
 
         dstdir, dstname = os.path.split(dstpath)
 
-        pathlib.Path(dstdir).mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(srcpath, dstpath)
+        if args.copy:
+            pathlib.Path(dstdir).mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(srcpath, dstpath)
 
-        if args.verbose:
-            sys.stdout.write("DEBUG: repo %s copy from '%s' to '%s' (%s)\n" % (repo_handle, str(srcpath), dstpath, shortpath))
+            if args.verbose:
+                sys.stdout.write("DEBUG: repo %s copy from '%s' to '%s' (%s)\n" % (repo_handle, str(srcpath), dstpath, shortpath))
+        else:
+            shortpath = "https://raw.githubusercontent.com/" + repodata["repo"] + "/" + repodata["branch"] + srcpath[len(gitdir):]
+
 
         images.append({
             'name': name,
@@ -195,7 +205,7 @@ for repo_handle in args.repos:
         'data': repodata,
         'handle': repo_handle,
         'lastmodified': datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'),
-        'name': repodata['name'] if 'name' in repodata else repodata['repo'],
+        'name': repodata['name'] if 'name' in repodata else repo_handle,
         'provider': repodata['provider'],
         'provider_icon': 'https://www.vectorlogo.zone/logos/' + repodata['provider'] + '/' + repodata['provider'] + '-icon.svg',
         'url': giturl,
@@ -206,6 +216,7 @@ for repo_handle in args.repos:
     if 'website' in repodata:
         data['website'] = repodata['website']
 
+    pathlib.Path(os.path.join(outputdir, repo_handle)).mkdir(parents=True, exist_ok=True)
     outputpath = os.path.join(outputdir, repo_handle, "sourceData.json")
 
     outputfile = open(outputpath, 'w')
