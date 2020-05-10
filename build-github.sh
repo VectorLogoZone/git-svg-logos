@@ -18,7 +18,7 @@ if [ -f "${ENV_FILE}" ]; then
     export $(cat "${ENV_FILE}")
 fi
 
-OUTPUT_DIR=${OUTPUT_DIR:-./output}
+OUTPUT_DIR=${OUTPUT_DIR:-./output-github}
 if [ ! -d "${OUTPUT_DIR}" ]; then
     echo "INFO: creating output directory ${OUTPUT_DIR}"
     mkdir -p "${OUTPUT_DIR}"
@@ -46,6 +46,6 @@ fi
 # make the index
 #
 echo "INFO: building compressed index"
-tar cvzf ${BUILD_DIR}/sourceData.tgz ${OUTPUT_DIR}/*/sourceData.json
+tar cvzf ${BUILD_DIR}/sourceData-github.tgz ${OUTPUT_DIR}/*/sourceData.json
 
 echo "INFO: completed build at $(date -u +%Y-%m-%dT%H:%M:%SZ)"

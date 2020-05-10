@@ -313,7 +313,7 @@
   handle: katacontainers
   repo: kata-containers/www.katacontainers.io
   branch: master
-  directory: img
+  directory: static/img
   website: 'https://katacontainers.io/'
   name: 'Kata Containers'
   logo: 'https://www.vectorlogo.zone/logos/katacontainersio/katacontainersio-icon.svg'
@@ -573,7 +573,7 @@
   handle: tiagoporto-music
   repo: tiagoporto/svg-music-logos
   branch: master
-  directory: src/logos
+  directory: src/img/logos
   website: 'http://tiagoporto.github.io/svg-music-logos/'
 
 - provider: github

@@ -24,10 +24,12 @@ parser.add_argument("-q", "--quiet", help="hide status messages", default=True, 
 parser.add_argument("--always", help="always process", default=False, dest='always', action="store_true")
 parser.add_argument("--branch", help="git branch (default='%s')" % default_branch, action="store", default=default_branch)
 parser.add_argument("--cache", help="location of previously downloaded repo", action="store", default="./cache")
+parser.add_argument("--cdnprefix", help="prefix for CDN URLs", action="store", default="")
 parser.add_argument("--input", help="YAML of potential repos", action="store", default="data/sources.yaml")
 parser.add_argument("--output", help="output directory", action="store", default="./local")
 parser.add_argument("--nocleanup", help="do not erase temporary files", default=True, dest='cleanup', action="store_false")
 parser.add_argument("--nocopy", help="do not copy files", action="store_false", default=True, dest='copy')
+parser.add_argument("--nosparse", help="do not do a sparse checkout", action="store_false", default=True, dest='sparse')
 parser.add_argument("--provider", help="only do specific provider", action="store", default="*", dest="provider")
 parser.add_argument('repos', help='repos (all if none specified)', metavar='repos', nargs='*')
 
@@ -88,15 +90,15 @@ for repo_handle in args.repos:
     if os.path.isdir(gitdir):
         os.chdir(gitdir)
 
-        cached_commit = sh.git("rev-parse", "HEAD")
+        cached_commit = sh.git("rev-parse", "HEAD", "--", _err_to_out=True, _out=sys.stdout)
 
         if args.verbose:
             sys.stdout.write("INFO: pulling changes from git repo %s\n" % giturl)
-        sh.git.pull("--ff-only", _err_to_out=True, _out=os.path.join(cachedir, "git-" + repo_handle + ".stdout"))
+        sh.git.pull("origin", repodata["branch"], _err_to_out=True, _out=sys.stdout)
         if args.verbose:
             sys.stdout.write("INFO: pull complete\n")
 
-        current_commit = sh.git("rev-parse", "HEAD")
+        current_commit = sh.git("rev-parse", "HEAD", _err_to_out=True, _out=sys.stdout)
         if cached_commit == current_commit:
             if args.always:
                 sys.stdout.write("INFO: no changes to repo since last run but processing anyway\n")
@@ -105,17 +107,38 @@ for repo_handle in args.repos:
                 continue
     else:
         if args.verbose:
-            sys.stdout.write("INFO: cloning git repo %s\n" % giturl)
-        sh.git.clone(giturl, gitdir, _err_to_out=True, _out=os.path.join(cachedir, "git-" + repo_handle + ".stdout"))
-        if args.verbose:
-            sys.stdout.write("INFO: clone complete\n")
-        os.chdir(gitdir)
+            sys.stdout.write("INFO: retrieving git repo %s (sparse=%s)\n" % (giturl, args.sparse))
+
+        if args.sparse:
+            # full clone takes too long
+            #
+            os.mkdir(gitdir)
+            os.chdir(gitdir)
+            sh.git.init(_err_to_out=True, _out=sys.stdout)
+            sh.git.remote('add', 'origin', giturl, _err_to_out=True, _out=sys.stdout)
+            if len(repodata["directory"]) > 0:
+                sparse_dir = '\\' + repodata["directory"] if repodata["directory"][0] == '!' else repodata["directory"]
+                sh.git.config('core.sparsecheckout', 'true', _err_to_out=True, _out=sys.stdout)
+                fsc = open(".git/info/sparse-checkout", "a")
+                fsc.write("%s/*\n" % sparse_dir)
+                fsc.close()
+            sh.git.pull("--depth=1", "origin", repodata["branch"], _err_to_out=True, _out=sys.stdout)
+            if args.verbose:
+                sys.stdout.write("INFO: sparse pull complete\n")
+        else:
+            sh.git.clone(giturl, gitdir, _err_to_out=True, _out=sys.stdout)
+            os.chdir(gitdir)
+
+            if args.verbose:
+                sys.stdout.write("INFO: clone complete\n")
 
     if args.verbose:
         sys.stdout.write("INFO: switching to branch '%s'\n" % (repodata['branch']))
-    sh.git.checkout(repodata['branch'], _err_to_out=True, _out=os.path.join(cachedir, "git-" + repo_handle + ".stdout"))
+    sh.git.checkout(repodata['branch'], _err_to_out=True, _out=sys.stdout)
 
-    current_commit = sh.git("rev-parse", "HEAD")
+    current_commit = sh.git("rev-parse", "HEAD", _err_to_out=True, _out=sys.stdout)
+    last_mod = "%s" % sh.git.log("-1", "--format=%cd", "--date=iso")
+    sys.stdout.write("INFO: last modified on %s\n" % last_mod)
 
     logodir = os.path.join(gitdir, repodata['directory'])
     if args.verbose:
@@ -183,14 +206,16 @@ for repo_handle in args.repos:
 
             if args.verbose:
                 sys.stdout.write("DEBUG: repo %s copy from '%s' to '%s' (%s)\n" % (repo_handle, str(srcpath), dstpath, shortpath))
+
+            imgurl = args.cdnprefix + shortpath
         else:
-            shortpath = "https://raw.githubusercontent.com/" + repodata["repo"] + "/" + repodata["branch"] + srcpath[len(gitdir):]
+            imgurl = "https://raw.githubusercontent.com/" + repodata["repo"] + "/" + repodata["branch"] + srcpath[len(gitdir):]
 
 
         images.append({
             'name': name,
             'src': giturl + "/blob/" + repodata['branch'] + srcpath[len(gitdir):],
-            'img': shortpath
+            'img': imgurl
             })
 
     sys.stdout.write("OUTPUT: %d svg files found for %s (%s)\n" % (len(images), repo_handle, repodata['repo']))
@@ -204,7 +229,7 @@ for repo_handle in args.repos:
     data = {
         'data': repodata,
         'handle': repo_handle,
-        'lastmodified': datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'),
+        'lastmodified': last_mod,
         'name': repodata['name'] if 'name' in repodata else repo_handle,
         'provider': repodata['provider'],
         'provider_icon': 'https://www.vectorlogo.zone/logos/' + repodata['provider'] + '/' + repodata['provider'] + '-icon.svg',

@@ -25,14 +25,23 @@ OUTPUT_DIR=${LOCAL_DIR:-./remote}
 #
 echo "INFO: loading logos into ${OUTPUT_DIR}"
 ./bin/loadrepo.py \
-    --output=${OUTPUT_DIR}
+    --cdnprefix=${CDN_PREFIX} \
+    --output=${OUTPUT_DIR} \
+    --provider=gitlab
 
 # to force it to copy even if no new commits, add:
 #    --always \
 
+BUILD_DIR=${BUILD_DIR:-./build}
+if [ ! -d "${BUILD_DIR}" ]; then
+    echo "INFO: creating build directory ${BUILD_DIR}"
+    mkdir -p "${BUILD_DIR}"
+fi
+
 #
 # make the index
 #
-tar cvzf ${OUTPUT_DIR}/sourceData.tgz ${OUTPUT_DIR}/*/sourceData.json
+echo "INFO: building compressed index"
+tar cvzf ${BUILD_DIR}/sourceData-gitlab.tgz ${OUTPUT_DIR}/*/sourceData.json
 
 echo "INFO: complete at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
