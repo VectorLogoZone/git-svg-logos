@@ -23,6 +23,7 @@
   branch: master
   directory: logos
   rename: [ "^(.*)-logo.svg$", "\\1.svg" ]
+  logo: 'https://www.vectorlogo.zone/logos/advocately/advocately-icon.svg'
 
 - provider: github
   handle: alexpeattie
@@ -36,6 +37,7 @@
   branch: master
   directory: src/icons
   website: 'https://www.wappalyzer.com/'
+#logo:
 
 - provider: github
   handle: browser-logos
@@ -63,12 +65,15 @@
   branch: master
   directory: svg/color
   website: 'http://cryptoicons.co/'
+#logo:
 
 - provider: github
   handle: automattic-social-logos
   repo: Automattic/social-logos
   branch: master
   directory: svg-min
+  logo: https://www.vectorlogo.zone/logos/automattic/automattic-icon.svg
+  website: https://automattic.github.io/social-logos/
 
 - provider: github
   handle: shieldsio
@@ -91,6 +96,7 @@
   branch: master
   directory: public/logos
   website: 'https://bestofjs.org/'
+#logo
 
 - provider: gitlab
   handle: celebdor
@@ -110,6 +116,7 @@
   repo: cncf/artwork
   branch: master
   directory: ''
+  logo: https://www.vectorlogo.zone/logos/cncfio/cncfio-icon.svg
   website: 'https://www.cncf.io/'
 
 - provider: github
@@ -117,6 +124,7 @@
   repo: cncf/landscape
   branch: master
   directory: hosted_logos
+  logo: https://www.vectorlogo.zone/logos/cncfio/cncfio-icon.svg
   website: 'https://landscape.cncf.io/'
 
 - provider: github
@@ -124,6 +132,8 @@
   repo: coinranking/cryptocurrency-icons
   branch: master
   directory: icons
+  website: https://coinranking.com/
+#logo:
 
 - provider: github
   handle: cr0ybot
@@ -158,6 +168,7 @@
   directory: svg
   website: 'http://diemendesign.github.io/LibreICONS/'
   name: 'LibreIcons (black)'
+#logo:
 
 - provider: github
   handle: libreicons-color
@@ -203,6 +214,7 @@
   branch: master
   directory: src/svg
   website: 'http://fizzed.com/oss/font-mfizz'
+#logo:
 
 - provider: github
   handle: fontawesome
@@ -242,6 +254,7 @@
   branch: master
   directory: images/SVG
   website: 'https://haeckdesign.com/freebies/icons/get-social-icon-set'
+#logo:
 
 - provider: github
   handle: simple-svg-brand-logos
@@ -261,6 +274,7 @@
   branch: master
   directory: svg
   website: 'https://useiconic.com/open'
+  logo: 'https://www.vectorlogo.zone/logos/invisionapp/invisionapp-icon.svg'
 
 - provider: github
   handle: jaywcjlove
@@ -408,7 +422,7 @@
   directory: vector
   website: 'http://hexb.in/'
   name: 'Hexbin'
-  LATER-logo: ''
+#logo: ''
 
 - provider: gitlab
   handle: monopolies
@@ -421,6 +435,8 @@
   repo: mpay24/payment-logos
   branch: master
   directory: svg/color
+  website: https://www.mpay24.com/web/
+#logo:
 
 - provider: github
   handle: muffinresearch
