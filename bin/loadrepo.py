@@ -137,7 +137,7 @@ for repo_handle in args.repos:
     sh.git.checkout(repodata['branch'], _err_to_out=True, _out=sys.stdout)
 
     current_commit = sh.git("rev-parse", "HEAD", _err_to_out=True, _out=sys.stdout)
-    last_mod = "%s" % sh.git.log("-1", "--format=%cd", "--date=iso")
+    last_mod = "%s" % sh.git.log("-1", "--format=%cd", "--date=iso", _tty_out=False)
     sys.stdout.write("INFO: last modified on %s\n" % last_mod)
 
     logodir = os.path.join(gitdir, repodata['directory'])
