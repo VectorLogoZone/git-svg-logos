@@ -40,12 +40,20 @@ fi
 #
 # copy local back to remote storage
 #
-echo "INFO: copy to ${REMOTE_LOCATION}"
-rclone copy "${LOCAL_DIR}" "${REMOTE_LOCATION}" \
-    --progress 
+#echo "INFO: copying images to ${REMOTE_LOCATION}"
+#rclone copy "${LOCAL_DIR}" "${REMOTE_LOCATION}" \
+#    --progress 
 
 #
-# copying static files
+# copy the index (LATER: move to github release)
+#
+echo "INFO: copying index"
+rclone copy ./build/sourceData-gitlab.tgz ${REMOTE_LOCATION} \
+    --no-update-modtime
+exit 0
+
+#
+# copy static files
 #
 echo "INFO: copying static files"
 rclone copy ./www ${REMOTE_LOCATION} \

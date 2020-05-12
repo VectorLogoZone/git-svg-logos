@@ -645,38 +645,6 @@
   directory: build-source/logos
 
 - provider: github
-  handle: vlz-ar21
-  repo: VectorLogoZone/vectorlogozone
-  branch: gh-pages
-  include: '^(.+)-ar21\.svg$'
-  rename: [ "^(.+)-ar21.svg$", "\\1.svg" ]
-  directory: www/logos
-  website: 'https://www.vectorlogo.zone/'
-  name: 'VectorLogoZone (rectangles)'
-  logo: 'https://www.vectorlogo.zone/logos/vectorlogozone/vectorlogozone-icon.svg'
-
-- provider: github
-  handle: vlz-icon
-  repo: VectorLogoZone/vectorlogozone
-  branch: gh-pages
-  include: '^(.+)-icon\.svg$'
-  rename: [ "^(.+)-icon.svg$", "\\1.svg" ]
-  directory: www/logos
-  website: 'https://www.vectorlogo.zone/'
-  logo: 'https://www.vectorlogo.zone/logos/vectorlogozone/vectorlogozone-icon.svg'
-  name: 'VectorLogoZone (icons)'
-
-- provider: github
-  handle: vlz-other
-  repo: VectorLogoZone/vectorlogozone
-  branch: gh-pages
-  include: '^((?!-ar21|-icon).)*$'
-  directory: www/logos
-  website: 'https://www.vectorlogo.zone/'
-  logo: 'https://www.vectorlogo.zone/logos/vectorlogozone/vectorlogozone-icon.svg'
-  name: 'VectorLogoZone (other)'
-
-- provider: github
   handle: vorillaz
   repo: vorillaz/devicons
   branch: master
