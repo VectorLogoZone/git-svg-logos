@@ -82,7 +82,7 @@ for repo_handle in args.repos:
     if repodata['provider'] == 'github':
         giturl = "https://github.com/" + repodata['repo']
     elif repodata['provider'] == 'gitlab':
-        giturl = "https://gitlab.com/" + repodata['repo']
+        giturl = "https://gitlab.com/" + repodata['repo'] + ".git/"
     else:
         sys.stderr.write("ERROR: unknown or missing provider '%s'\n" % repodata['provider'])
         sys.exit(3)
@@ -90,7 +90,7 @@ for repo_handle in args.repos:
     if os.path.isdir(gitdir):
         os.chdir(gitdir)
 
-        cached_commit = sh.git("rev-parse", "HEAD", "--", _err_to_out=True, _out=sys.stdout)
+        cached_commit = sh.git("rev-parse", "HEAD", "--", _err_to_out=True)
 
         if args.verbose:
             sys.stdout.write("INFO: pulling changes from git repo %s\n" % giturl)
@@ -98,7 +98,7 @@ for repo_handle in args.repos:
         if args.verbose:
             sys.stdout.write("INFO: pull complete\n")
 
-        current_commit = sh.git("rev-parse", "HEAD", _err_to_out=True, _out=sys.stdout)
+        current_commit = sh.git("rev-parse", "HEAD", _err_to_out=True)
         if cached_commit == current_commit:
             if args.always:
                 sys.stdout.write("INFO: no changes to repo since last run but processing anyway\n")
@@ -136,8 +136,8 @@ for repo_handle in args.repos:
         sys.stdout.write("INFO: switching to branch '%s'\n" % (repodata['branch']))
     sh.git.checkout(repodata['branch'], _err_to_out=True, _out=sys.stdout)
 
-    current_commit = sh.git("rev-parse", "HEAD", _err_to_out=True, _out=sys.stdout)
-    last_mod = "%s" % sh.git.log("-1", "--format=%cd", "--date=iso", _tty_out=False)
+    current_commit = sh.git("rev-parse", "HEAD", _err_to_out=True)
+    last_mod = ("%s" % sh.git.log("-1", "--format=%cd", "--date=iso", _tty_out=False)).strip()
     sys.stdout.write("INFO: last modified on %s\n" % last_mod)
 
     logodir = os.path.join(gitdir, repodata['directory'])
@@ -208,9 +208,10 @@ for repo_handle in args.repos:
                 sys.stdout.write("DEBUG: repo %s copy from '%s' to '%s' (%s)\n" % (repo_handle, str(srcpath), dstpath, shortpath))
 
             imgurl = args.cdnprefix + shortpath
-        else:
+        elif args.provider == 'github':
             imgurl = "https://raw.githubusercontent.com/" + repodata["repo"] + "/" + repodata["branch"] + srcpath[len(gitdir):]
-
+        elif args.provider == 'gitlab':
+            imgurl = "https://gitlab.svg.zone/" + repodata["repo"] + "/raw/" + repodata["branch"] + srcpath[len(gitdir):]
 
         images.append({
             'name': name,

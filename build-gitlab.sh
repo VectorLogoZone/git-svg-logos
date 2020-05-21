@@ -25,7 +25,7 @@ OUTPUT_DIR=${LOCAL_DIR:-./remote}
 #
 echo "INFO: loading logos into ${OUTPUT_DIR}"
 ./bin/loadrepo.py \
-    --cdnprefix=${CDN_PREFIX} \
+    --nocopy \
     --output=${OUTPUT_DIR} \
     --provider=gitlab
 
