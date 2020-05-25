@@ -53,10 +53,9 @@
 
 - provider: github
   handle: logomono
-  repo: andyfitz/logomono
+  repo: AwesomeLogos/logomono
   branch: gh-pages
   directory: logos
-  website: 'http://logomono.com/'
   name: 'logomono'
 
 - provider: github
