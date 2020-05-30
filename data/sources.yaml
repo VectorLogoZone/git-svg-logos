@@ -37,7 +37,7 @@
   branch: master
   directory: src/icons
   website: 'https://www.wappalyzer.com/'
-#logo:
+  logo: 'https://www.vectorlogo.zone/logos/wappalyzer/wappalyzer-icon.svg'
 
 - provider: github
   handle: browser-logos
@@ -64,7 +64,7 @@
   branch: master
   directory: svg/color
   website: 'http://cryptoicons.co/'
-#logo:
+  logo: 'https://www.vectorlogo.zone/logos/cryptoiconsco/cryptoiconsco-icon.svg'
 
 - provider: github
   handle: automattic-social-logos
@@ -132,7 +132,7 @@
   branch: master
   directory: icons
   website: https://coinranking.com/
-#logo:
+  logo: 'https://www.vectorlogo.zone/logos/coinranking/coinranking-icon.svg'
 
 - provider: github
   handle: cr0ybot
@@ -167,7 +167,7 @@
   directory: svg
   website: 'http://diemendesign.github.io/LibreICONS/'
   name: 'LibreIcons (black)'
-#logo:
+  logo: 'https://www.vectorlogo.zone/logos/diemendesign/diemendesign-icon.svg'
 
 - provider: github
   handle: libreicons-color
@@ -176,6 +176,7 @@
   directory: svg-color
   website: 'http://diemendesign.github.io/LibreICONS/'
   name: 'LibreIcons (color)'
+  logo: 'https://www.vectorlogo.zone/logos/diemendesign/diemendesign-icon.svg'
 
 - provider: github
   handle: diogomachado
@@ -213,7 +214,7 @@
   branch: master
   directory: src/svg
   website: 'http://fizzed.com/oss/font-mfizz'
-#logo:
+  logo: 'https://www.vectorlogo.zone/logos/fizzed/fizzed-icon.svg'
 
 - provider: github
   handle: fontawesome
@@ -253,7 +254,7 @@
   branch: master
   directory: images/SVG
   website: 'https://haeckdesign.com/freebies/icons/get-social-icon-set'
-#logo:
+  logo: 'https://www.vectorlogo.zone/logos/haeckdesign/haeckdesign-icon.svg'
 
 - provider: github
   handle: simple-svg-brand-logos
@@ -421,7 +422,7 @@
   directory: vector
   website: 'http://hexb.in/'
   name: 'Hexbin'
-#logo: ''
+  logo: 'https://www.vectorlogo.zone/logos/hexbin/hexbin-icon.svg'
 
 - provider: gitlab
   handle: monopolies
@@ -435,7 +436,7 @@
   branch: master
   directory: svg/color
   website: https://www.mpay24.com/web/
-#logo:
+  logo: 'https://www.vectorlogo.zone/logos/mpay24/mpay24-icon.svg'
 
 - provider: github
   handle: muffinresearch
@@ -577,6 +578,7 @@
   branch: master
   directory: src/assets/images
   website: 'https://tabler.io/'
+  logo: 'https://www.vectorlogo.zone/logos/tablerio/tablerio-icon.svg'
 
 - provider: github
   handle: focialmix
@@ -610,6 +612,7 @@
   directory: static/img
   website: 'https://todogroup.org/'
   rename: [ "^(logo_)?(.*)$", "\\2" ]
+  logo: 'https://www.vectorlogo.zone/logos/todogroup/todogroup-icon.svg'
 
 - provider: github
   handle: uditkumar489
