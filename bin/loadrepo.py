@@ -208,9 +208,9 @@ for repo_handle in args.repos:
                 sys.stdout.write("DEBUG: repo %s copy from '%s' to '%s' (%s)\n" % (repo_handle, str(srcpath), dstpath, shortpath))
 
             imgurl = args.cdnprefix + shortpath
-        elif args.provider == 'github':
+        elif repodata['provider'] == 'github':
             imgurl = "https://raw.githubusercontent.com/" + repodata["repo"] + "/" + repodata["branch"] + srcpath[len(gitdir):]
-        elif args.provider == 'gitlab':
+        elif repodata['provider'] == 'gitlab':
             imgurl = "https://gitlab.svg.zone/" + repodata["repo"] + "/raw/" + repodata["branch"] + srcpath[len(gitdir):]
 
         images.append({

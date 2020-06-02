@@ -35,7 +35,7 @@
   handle: wappalyzer
   repo: AliasIO/Wappalyzer
   branch: master
-  directory: src/icons
+  directory: src/drivers/webextension/images/icons
   website: 'https://www.wappalyzer.com/'
   logo: 'https://www.vectorlogo.zone/logos/wappalyzer/wappalyzer-icon.svg'
 
