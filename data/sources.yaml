@@ -29,7 +29,7 @@
   handle: alexpeattie
   repo: alexpeattie/alexpeattie.com
   branch: master
-  directory: source/assets/images/projects/justvector
+  directory: src/assets/images/projects/justvector
 
 - provider: github
   handle: wappalyzer
