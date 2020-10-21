@@ -352,10 +352,10 @@
 
 - provider: github
   handle: devicon
-  repo: konpa/devicon
+  repo: devicons/devicon
   branch: master
   directory: icons
-  website: 'https://konpa.github.io/devicon/'
+  website: 'https://devicon.dev/'
 
 - provider: github
   handle: vexillo
