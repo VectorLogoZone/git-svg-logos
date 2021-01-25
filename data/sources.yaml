@@ -589,7 +589,7 @@
 - provider: github
   handle: tiagoporto-music
   repo: tiagoporto/svg-music-logos
-  branch: master
+  branch: main
   directory: public/logos
   website: 'http://tiagoporto.github.io/svg-music-logos/'
 
