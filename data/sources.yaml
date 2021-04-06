@@ -608,7 +608,7 @@
 - provider: github
   handle: todogroup
   repo: todogroup/todogroup.github.io
-  branch: master
+  branch: main
   directory: static/img
   website: 'https://todogroup.org/'
   rename: [ "^(logo_)?(.*)$", "\\2" ]
