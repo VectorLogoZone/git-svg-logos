@@ -1,5 +1,7 @@
 # git repos of SVG Logos [<img alt="git Logo" src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" height="80" align="right" />](https://logosear.ch/)
 
+[![build](https://github.com/VectorLogoZone/git-svg-logos/actions/workflows/release.yaml/badge.svg)](https://github.com/VectorLogoZone/git-svg-logos/actions/workflows/release.yaml)
+
 Public git repositories of SVG logos: this is the list used by [LogoSear.ch](https://logosear.ch/).
 
 ## The List
