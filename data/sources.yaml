@@ -28,7 +28,7 @@
 - provider: github
   handle: alexpeattie
   repo: alexpeattie/alexpeattie.com
-  branch: master
+  branch: main
   directory: src/assets/images/projects/justvector
 
 - provider: github
