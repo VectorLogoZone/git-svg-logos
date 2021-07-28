@@ -26,4 +26,6 @@ jobs:
           pip install sh unidecode pyaml
 
       - name: Validate image repos
+        env:
+          PYTHONUNBUFFERED: "TRUE"
         run: ./bin/validate_repo.py

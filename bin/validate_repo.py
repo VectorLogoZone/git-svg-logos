@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 -u
+#!/usr/bin/env python
 #
 # check that the repo branch and path are valid
 #

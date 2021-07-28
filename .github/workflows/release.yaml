@@ -26,9 +26,13 @@ jobs:
           pip install sh unidecode pyaml
 
       - name: Build Github Index
+        env:
+          PYTHONUNBUFFERED: "TRUE"
         run: ./build-github.sh
 
       - name: Build Gitlab Index
+        env:
+          PYTHONUNBUFFERED: "TRUE"
         run: ./build-gitlab.sh
 
       - run: echo "RELEASE_DATE=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> $GITHUB_ENV
