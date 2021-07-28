@@ -59,14 +59,6 @@
   name: 'logomono'
 
 - provider: github
-  handle: atomiclabs
-  repo: atomiclabs/cryptocurrency-icons
-  branch: master
-  directory: svg/color
-  website: 'http://cryptoicons.co/'
-  logo: 'https://www.vectorlogo.zone/logos/cryptoiconsco/cryptoiconsco-icon.svg'
-
-- provider: github
   handle: automattic-social-logos
   repo: Automattic/social-logos
   branch: master
@@ -82,12 +74,6 @@
   website: 'https://shields.io/'
   name: 'Shields.IO'
   logo: 'https://www.vectorlogo.zone/logos/shieldsio/shieldsio-icon.svg'
-
-- provider: github
-  handle: behdad
-  repo: behdad/region-flags
-  branch: gh-pages
-  directory: svg
 
 - provider: github
   handle: bestofjs
@@ -192,7 +178,7 @@
 
 - provider: github
   handle: file-icons
-  repo: file-icons/source
+  repo: file-icons/icons
   branch: master
   directory: svg
 
@@ -234,6 +220,12 @@
   website: 'https://fontello.github.io/brandico.font/demo.html'
 
 - provider: github
+  handle: fonttools
+  repo: fonttools/region-flags
+  branch: gh-pages
+  directory: svg
+
+- provider: github
   handle: getoutreach
   repo: getoutreach/stacked
   branch: master
@@ -269,6 +261,18 @@
   directory: svg
 
 - provider: github
+  handle: iaremarkus-crypto
+  repo: iaremarkus/cryptocurrency-logos
+  branch: master
+  directory: svgs
+
+- provider: github
+  handle: iaremarkus-gateway
+  repo: iaremarkus/payment-gateway-logos
+  branch: master
+  directory: svgs
+
+- provider: github
   handle: iconic
   repo: iconic/open-iconic
   branch: master
@@ -284,7 +288,7 @@
 
 - provider: github
   handle: fontos
-  repo: JeyKeu/font-os
+  repo: JunaidQadirB/font-os
   branch: master
   directory: vectors
 
@@ -549,9 +553,17 @@
   css: gridbg
 
 - provider: github
+  handle: spothq
+  repo: spothq/cryptocurrency-icons
+  branch: master
+  directory: svg/color
+  website: 'http://cryptoicons.co/'
+  logo: 'https://www.vectorlogo.zone/logos/cryptoiconsco/cryptoiconsco-icon.svg'
+
+- provider: github
   handle: starter-workflows
   repo: actions/starter-workflows
-  branch: master
+  branch: main
   directory: icons
 
 - provider: github
@@ -582,7 +594,7 @@
 
 - provider: github
   handle: focialmix
-  repo: TheEssemCraft/FocialMix
+  repo: TheEssem/FocialMix
   branch: dev
   directory: src
 
@@ -607,7 +619,7 @@
 
 - provider: github
   handle: todogroup
-  repo: todogroup/todogroup.github.io
+  repo: todogroup/todogroup.org
   branch: main
   directory: static/img
   website: 'https://todogroup.org/'
@@ -658,18 +670,6 @@
   repo: vscode-icons/vscode-icons
   branch: master
   directory: icons
-
-- provider: github
-  handle: wondergryphon-crypto
-  repo: wondergryphon/cryptocurrency-logos
-  branch: master
-  directory: svgs
-
-- provider: github
-  handle: wondergryphon-gateway
-  repo: wondergryphon/payment-gateway-logos
-  branch: master
-  directory: svgs
 
 - provider: gitlab
   handle: channel-logos
