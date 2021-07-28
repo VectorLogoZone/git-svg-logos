@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 -u
+#!/usr/bin/env python -u
 #
 # get the list of svg images from a repo
 #
